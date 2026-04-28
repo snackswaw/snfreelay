@@ -291,7 +291,6 @@ html {
     </style>
 </head>
 <script>
-    <script>
     // === 1. 导航栏滚动变色效果 (保持不变) ===
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
@@ -337,6 +336,24 @@ html {
         // 第三步：开始观察所有元素
         animatedElements.forEach(el => observer.observe(el));
     });
+
+    // 进厂滑动动画
+document.addEventListener('DOMContentLoaded', function () {
+    const items = document.querySelectorAll('.hero, .card, .navbar');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    items.forEach(el => {
+        el.classList.add('slide-in');
+        observer.observe(el);
+    });
+});
+
 </script>
 
     <body>
