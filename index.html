@@ -205,9 +205,129 @@
     }
 }
 
+    /* === 新增动画样式 (请勿修改原有代码) === */
+
+/* 1. 卡片悬停放大动画 */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 2. 渐入动画 (用于页面加载) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.hero, .card, .green-box {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* 3. 标志旋转动画 (Logo) */
+.logo-area img:hover {
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    from { transform: rotate(0deg) scale(1.1); }
+    to { transform: rotate(360deg) scale(1.1); }
+}
+
+/* 4. 按钮呼吸效果 */
+.btn {
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+.btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+/* 5. 导航栏滚动变色 (固定在顶部时背景变白) */
+.navbar.scrolled {
+    background-color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === 让页面滚动变得丝般顺滑 === */
+html {
+    scroll-behavior: smooth;
+}
+
+/* === 新增：为滚动渐现效果准备的样式 === */
+
+/* 1. 初始状态：元素是看不见的，并且在下方一点的位置 */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out; /* 动画过渡效果，0.8秒 */
+}
+
+/* 2. 激活状态：当元素被JS添加这个类时，它会变得可见并回到原位 */
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
     </style>
 </head>
-<body>
+<script>
+    <script>
+    // === 1. 导航栏滚动变色效果 (保持不变) ===
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        // 当滚动超过 50px 时添加背景色
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // === 2. 统一处理动画：结合“加载渐显”与“滚动渐现” ===
+    document.addEventListener('DOMContentLoaded', function() {
+        // 选中所有需要动画的元素
+        const animatedElements = document.querySelectorAll('.hero, .card, .green-box');
+
+        // 第一步：先给所有元素加上 CSS 初始状态（隐藏且下移）
+        // 这一步是为了让 CSS 能够控制它们，防止页面加载时元素是乱跳出来的
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)'; // 稍微移下来一点，更有“浮起”的感觉
+            el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; // 统一过渡效果
+        });
+
+        // 第二步：使用 IntersectionObserver 监听滚动
+        // 这是一个高性能的 API，专门用来检测元素是否进入屏幕
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // 如果元素进入了可视区域
+                if (entry.isIntersecting) {
+                    // 让它变回不透明且回到原位（触发 CSS 动画）
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    
+                    // 动画播放一次后，停止观察该元素（节省性能）
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1 // 当元素有 10% 进入屏幕时就触发
+        });
+
+        // 第三步：开始观察所有元素
+        animatedElements.forEach(el => observer.observe(el));
+    });
+</script>
+
+    <body>
 
     <!-- 导航栏 -->
     <nav class="navbar">
