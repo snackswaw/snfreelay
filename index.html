@@ -165,6 +165,46 @@
             font-size: 0.9rem;
             color: #d32f2f;
         }
+
+        /* --- 手机竖屏适配 (屏幕宽度小于 768px 时生效) --- */
+@media (max-width: 767px) {
+    /* 1. 让导航链接容器变成垂直排列 */
+    .nav-links {
+        /* 取消水平排列，改为垂直堆叠 */
+        flex-direction: column; 
+        /* 减少垂直方向的间距，避免太松散 */
+        gap: 10px; 
+        /* 可选：给导航栏加个背景色，防止内容透过来看不清 */
+        background-color: #f8f9fa; 
+        /* 可选：给导航栏加个内边距 */
+        padding: 10px 0; 
+    }
+
+    /* 2. 修正导航栏整体布局（防止挤压） */
+    .navbar {
+        /* 保持水平居中对齐，或者改为 flex-start 靠左对齐 */
+        justify-content: center; 
+        /* 或者使用 justify-content: flex-start; 靠左 */
+        /* 增加上下内边距，让点击区域更大 */
+        padding: 10px 5%; 
+    }
+
+    /* 3. 修正 Logo 区域（防止 Logo 和文字挤在一起） */
+    .logo-area {
+        /* 文字居中，方便在窄屏幕上阅读 */
+        text-align: center; 
+        /* 增加底部边距，与导航链接隔开 */
+        margin-bottom: 5px; 
+    }
+
+    /* 4. 按钮样式微调 */
+    .join-btn {
+        /* 让按钮变宽占满容器，或者保持原样 */
+        /* 如果希望按钮也占满一行，取消下面的注释 */
+        /* display: block; width: 100%; text-align: center; */
+    }
+}
+
     </style>
 </head>
 <body>
