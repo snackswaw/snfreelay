@@ -333,6 +333,26 @@ if (!okPages.includes(nowPath)) {
     </div>
     `;
 }
+// 这里加了什么？自己看看
+document.addEventListener('DOMContentLoaded', function() {
+  const now = new Date();
+  const month = now.getMonth() + 1; 
+  const day = now.getDate();
+
+  if (month === 4 && day === 1) {
+    const navbar = document.querySelector('.navbar'); 
+    const foolBtn = document.createElement('a');
+    foolBtn.textContent = '本人喜爱';
+    foolBtn.href = 'https://www.bilibili.com/video/av546403908/'; 
+    foolBtn.style.marginLeft = '20px';
+    foolBtn.style.color = '#fff';
+    foolBtn.style.textDecoration = 'none';
+    foolBtn.style.padding = '8px 16px';
+    foolBtn.style.background = '#ff4d4f';
+    foolBtn.style.borderRadius = '4px';
+    navbar.appendChild(foolBtn);
+  }
+});
 </script>
 
 
