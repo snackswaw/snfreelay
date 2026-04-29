@@ -289,70 +289,35 @@ html {
     </style>
 </head>
 <script>
-    // === 1. 导航栏滚动变色效果 (保持不变) ===
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        // 当滚动超过 50px 时添加背景色
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+let lastScrollTop = 0;
+const navbar = document.querySelector('.navbar');
 
-    // === 2. 统一处理动画：结合“加载渐显”与“滚动渐现” ===
-    document.addEventListener('DOMContentLoaded', function() {
-        // 选中所有需要动画的元素
-        const animatedElements = document.querySelectorAll('.hero, .card, .green-box');
+window.addEventListener('scroll', function() {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // 第一步：先给所有元素加上 CSS 初始状态（隐藏且下移）
-        // 这一步是为了让 CSS 能够控制它们，防止页面加载时元素是乱跳出来的
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)'; // 稍微移下来一点，更有“浮起”的感觉
-            el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; // 统一过渡效果
-        });
+  // 只在手机竖屏生效（可选，想全平台都生效就删掉这个if）
+  if (window.innerWidth <= 768) {
+    // 向下滑 → 隐藏导航栏
+    if (scrollTop > lastScrollTop && scrollTop > 50) {
+      navbar.classList.add('hide');
+    }
+    // 向上滑 → 显示导航栏
+    else {
+      navbar.classList.remove('hide');
+    }
+  }
 
-        // 第二步：使用 IntersectionObserver 监听滚动
-        // 这是一个高性能的 API，专门用来检测元素是否进入屏幕
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // 如果元素进入了可视区域
-                if (entry.isIntersecting) {
-                    // 让它变回不透明且回到原位（触发 CSS 动画）
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    
-                    // 动画播放一次后，停止观察该元素（节省性能）
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1 // 当元素有 10% 进入屏幕时就触发
-        });
+  // 保留你原来的滚动变色
+  if (scrollTop > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
 
-        // 第三步：开始观察所有元素
-        animatedElements.forEach(el => observer.observe(el));
-    });
-
-    // 进厂滑动动画
-document.addEventListener('DOMContentLoaded', function () {
-    const items = document.querySelectorAll('.hero, .card, .navbar');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    items.forEach(el => {
-        el.classList.add('slide-in');
-        observer.observe(el);
-    });
+  lastScrollTop = scrollTop;
 });
-
 </script>
+
 
     <body>
 
