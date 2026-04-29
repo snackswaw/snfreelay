@@ -272,6 +272,19 @@ html {
     transform: translateY(0);
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: top 0.3s ease; /* 平滑滑入滑出 */
+  z-index: 999;
+}
+/* 隐藏样式：移到屏幕外 */
+.navbar.hide {
+  top: -80px; /* 高度比你导航栏稍大一点就行 */
+}
+
 
     </style>
 </head>
