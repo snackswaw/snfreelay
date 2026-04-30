@@ -285,7 +285,33 @@ html {
   top: -80px; /* 高度比你导航栏稍大一点就行 */
 }
 
+/* === 滚动渐现与弹出动画效果 (模仿火绒风格) === */
 
+/* 1. 定义基础样式：默认是隐藏且位移的 */
+.animated-intro {
+    opacity: 0; /* 初始透明度为0 */
+    transform: translateY(40px); /* 初始位置在下方40px */
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 关键：cubic-bezier制造回弹感 */
+}
+
+/* 2. 定义触发状态：当滚动到可视区域时，恢复原位 */
+.animated-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 针对你特定介绍卡片的增强样式 --- */
+/* 如果你的介绍是放在 .card 或 .green-box 里的，可以用这个样式 */
+.animated-intro {
+    background-color: #fff; /* 保持卡片背景 */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* 默认阴影 */
+}
+
+/* 强调“弹出”的效果，可以增加一点阴影变化 */
+.animated-intro.visible {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* 触发时阴影变大，更有立体感 */
+}
+        
     </style>
 </head>
 <script>
