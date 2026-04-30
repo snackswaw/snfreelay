@@ -379,6 +379,40 @@ document.addEventListener('DOMContentLoaded', function() {
     navbar.appendChild(foolBtn);
   }
 });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    // 1. 找到你要做动画的元素
+    // 假设你的介绍是放在一个 class 为 "card" 或者 "green-box" 的 div 里
+    // 你可以根据实际情况修改选择器
+    const elements = document.querySelectorAll('.card, .green-box'); 
+
+    // 2. 定义触发函数
+    const revealOnScroll = () => {
+        // 获取当前浏览器窗口的高度
+        const windowHeight = window.innerHeight;
+        
+        // 遍历每一个元素
+        elements.forEach(element => {
+            // 获取元素距离页面顶部的距离
+            const elementTop = element.getBoundingClientRect().top;
+            
+            // 设置一个触发点（当元素距离视窗顶部还有 100px 时就开始动画）
+            const triggerPoint = 100;
+
+            // 如果元素已经滚动到了视窗内（距离顶部的距离小于窗口高度减去触发点）
+            if (elementTop < windowHeight - triggerPoint) {
+                // 给元素加上 "visible" 类，触发动画
+                element.classList.add('visible');
+            }
+        });
+    };
+
+    // 3. 初始化检查（页面刚加载完如果元素已经在视窗内，直接显示）
+    revealOnScroll();
+
+    // 4. 监听滚动事件
+    window.addEventListener("scroll", revealOnScroll);
+});
 </script>
 
 
