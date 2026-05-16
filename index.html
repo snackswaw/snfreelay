@@ -60,7 +60,7 @@
             border-radius: 5px;
             font-weight: bold;
             color: #000;
-            transition: transform 0.2s;
+            transition: transform 0.2;
         }
         .join-btn:hover { transform: scale(1.05); }
 
@@ -139,7 +139,7 @@
             border-radius: 50px;
             font-weight: bold;
             margin-top: 15px;
-            transition: transform 0.2s;
+            transition: transform 0.2;
             cursor: pointer;
             border: none;
         }
@@ -194,7 +194,7 @@
 
 /* 1. 卡片悬停放大动画 */
 .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3 ease, box-shadow 0.3 ease;
 }
 .card:hover {
     transform: translateY(-5px) scale(1.01);
@@ -207,12 +207,12 @@
     to { opacity: 1; transform: translateY(0); }
 }
 .hero, .card, .green-box {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 0.8 ease-out forwards;
 }
 
 /* 3. 标志旋转动画 (Logo) */
 .logo-area img:hover {
-    animation: spin 2s linear infinite;
+    animation: spin 2 linear infinite;
 }
 @keyframes spin {
     from { transform: rotate(0deg) scale(1.1); }
@@ -221,8 +221,8 @@
 
 /* 4. 按钮呼吸效果 */
 .btn {
-    transition: all 0.3s ease;
-    animation: pulse 2s infinite;
+    transition: all 0.3 ease;
+    animation: pulse 2 infinite;
 }
 .btn:hover {
     transform: scale(1.08) translateY(-2px);
@@ -252,7 +252,7 @@ html {
 .scroll-reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease-out; /* 动画过渡效果，0.8秒 */
+    transition: all 0.8 ease-out; /* 动画过渡效果，0.8秒 */
 }
 
 /* 2. 激活状态：当元素被JS添加这个类时，它会变得可见并回到原位 */
@@ -265,7 +265,7 @@ html {
 .slide-in {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+    transition: opacity 0.9 ease, transform 0.9 ease;
 }
 .slide-in.active {
     opacity: 1;
@@ -277,7 +277,7 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  transition: top 0.3s ease; /* 平滑滑入滑出 */
+  transition: top 0.3 ease; /* 平滑滑入滑出 */
   z-index: 999;
 }
 /* 隐藏样式：移到屏幕外 */
@@ -416,15 +416,11 @@ document.addEventListener('DOMContentLoaded', function() {
         <section id="join" class="card">
             <div class="section-title">加入?</div>
             <div class="green-box">
-                <strong>服务器ip:</strong> play.simpfun.cn:13667<br>
-                要白名单<br>
-                服务器有登录插件，翻译如下
-                <div class="code-block">
-                    /register (密码) (确认密码) [这里是注册]<br>
-                    /login (密码) [这里是登录]
+                <strong>我的山头邀请码:</strong> D402D713A42<br>
+                我们迁移到了我的山头（我的世界网易我的山头）
                 </div>
             </div>
-            <button class="btn btn-yellow" onclick="copyIp()">点击复制IP</button>
+            <button class="btn btn-yellow" onclick="copyIp()">点击复制邀请码</button>
         </section>
 
     </div>
@@ -432,9 +428,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <script>
         // 复制IP功能
         function copyIp() {
-            const ip = "play.simpfun.cn:13667";
+            const ip = "D402D713A42";
             navigator.clipboard.writeText(ip).then(() => {
-                alert("IP地址已复制: " + ip);
+                alert("我的山头邀请码复制成功: " + ip);
             });
         }
     </script>
