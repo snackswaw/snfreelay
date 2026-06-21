@@ -285,7 +285,19 @@ html {
   top: -80px; /* 高度比你导航栏稍大一点就行 */
 }
 
-
+/* --- 导航栏自动收起功能 --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: top 0.3 ease;
+    z-index: 999;
+}
+.navbar.hide {
+    top: -80px;
+}
+        
     </style>
 </head>
 <script>
@@ -353,6 +365,30 @@ document.addEventListener('DOMContentLoaded', function() {
     navbar.appendChild(foolBtn);
   }
 });
+
+    // === 4. 导航栏滚动自动收起 ===
+let lastScrollTop = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop && scrollTop > 80) {
+        // 向下滑动 → 隐藏导航栏
+        navbar.classList.add('hide');
+    } else {
+        // 向上滑动 → 显示导航栏
+        navbar.classList.remove('hide');
+    }
+
+    // 如果已经滚到顶部，强制显示导航栏
+    if (scrollTop <= 10) {
+        navbar.classList.remove('hide');
+    }
+
+    lastScrollTop = scrollTop;
+});
+
 </script>
 
 
