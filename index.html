@@ -390,6 +390,78 @@ window.addEventListener('scroll', function() {
 });
 
 </script>
+    
+    <!-- 公告弹窗样式 -->
+<style>
+.notice-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.notice-box {
+    width: 90%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+}
+.notice-box h2 {
+    margin-top: 0;
+    color: #333;
+}
+.notice-content {
+    line-height: 1.8;
+    margin: 20px 0;
+    color: #444;
+}
+.notice-close {
+    width: 100%;
+    padding: 10px;
+    background: #8bc34a;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+
+<!-- 公告弹窗结构 -->
+<div class="notice-mask" id="noticeMask">
+    <div class="notice-box">
+        <h2>站点公告</h2>
+        <div class="notice-content">
+我们增加了公告，以后所有的更新公告都会在这个网页上:)
+        </div>
+        <button class="notice-close" id="noticeClose">关闭</button>
+    </div>
+</div>
+
+<script>
+const mask = document.getElementById('noticeMask');
+const closeBtn = document.getElementById('noticeClose');
+const navNotice = document.querySelector('a[href="#noticeBtn"]');
+// 进入页面自动弹出
+window.onload = function() {
+    mask.style.display = 'flex';
+}
+// 关闭弹窗
+closeBtn.addEventListener('click', () => {
+    mask.style.display = 'none';
+})
+// 导航公告点击弹出
+navNotice.addEventListener('click', (e) => {
+    e.preventDefault();
+    mask.style.display = 'flex';
+})
+</script>
 
 
     <body>
@@ -403,7 +475,7 @@ window.addEventListener('scroll', function() {
         <div class="nav-links">
             <a href="#home">首页</a>
             <a href="#intro">介绍</a>
-            <a href="#whitelist">公告</a>
+            <a href="#noticeBtn">公告</a>
             <a href="https://www.kuaishou.com/profile/3xq8nd9epjus3fu?source=SEARCH" target="_blank">服主快手</a>
             <a href="https://space.bilibili.com/3546802582194951" target="_blank">服主B站</a>
         </div>
